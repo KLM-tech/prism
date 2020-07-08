@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，
+          你会看到log4j2内部各种详细输出。可以设置成OFF(关闭) 或 Error(只输出错误信息)。
+               30s 刷新此配置
+               -->
+<configuration status="WARN" monitorInterval="30">
+    <Filter type="ThresholdFilter" level="trace"/>
+
+    <Appenders>
+        <!-- 输出控制台日志的配置 -->
+        <Console name="console" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式 -->
+            <PatternLayout pattern="%d %-5p %t (%F:%L) %X{traceId} - %m%n"/>
+        </Console>
+
+        <!--<Kafka name="Kafka" topic="hdp_jinrong_qiangui_tech_data_api_two_online_real_time" syncSend="false">-->
+        <!--<PatternLayout pattern="%date %message" />-->
+        <!--<Property name="bootstrap.servers">192.168.175.25:9092,192.168.175.31:9092</Property>-->
+        <!--<Property name="timeout.ms">1000</Property>-->
+        <!--</Kafka>-->
+
+        <!-- 打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
+        <RollingRandomAccessFile name="infoFile" fileName="../log/tool/info.log"
+                                 immediateFlush="false"
+                                 filePattern="../log/tool/gz/$${date:yyyy-MM}/%d{yyyy-MM-dd}-%i.tool.gz">
+            <PatternLayout pattern="%d %-5p %t (%F:%L) %X{traceId} - %m%n"/>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20MB"/>
+            </Policies>
+
+            <Filters>
+                <!-- 只记录info和warn级别信息 -->
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+
+            <!-- 指定每天的最大压缩包个数，默认7个，超过了会覆盖之前的 -->
+            <DefaultRolloverStrategy max="50"/>
+        </RollingRandomAccessFile>
+
+        <!-- 存储所有error信息 -->
+        <RollingRandomAccessFile name="errorFile" fileName="../log/tool/error.log"
+                                 immediateFlush="false"
+                                 filePattern="../log/tool/gz/$${date:yyyy-MM}/%d{yyyy-MM-dd}-%i.error.gz">
+            <PatternLayout pattern="%m%n"/>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20MB"/>
+            </Policies>
+
+            <Filters>
+                <!-- 只记录error级别信息 -->
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+
+            <!-- 指定每天的最大压缩包个数，默认7个，超过了会覆盖之前的 -->
+            <DefaultRolloverStrategy max="50"/>
+        </RollingRandomAccessFile>
+
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- kafka日志输出 -->
+        <AsyncLogger name="kafkaLog" additivity="FALSE" level="info" includeLocation="true">
+            <appender-ref ref="console"/>
+        </AsyncLogger>
+        <AsyncRoot level="info" includeLocation="true">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="infoFile"/>
+            <AppenderRef ref="errorFile"/>
+        </AsyncRoot>
+    </Loggers>
+
+</configuration>

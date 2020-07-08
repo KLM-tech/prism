@@ -1,0 +1,25 @@
+mybatis:
+  mapper-locations: classpath:mapper/*/*.xml
+
+server:
+  port: 9899
+spring:
+  dataSource:
+    prism:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      max-idle: 10
+      max-wait: 10000
+      min-idle: 5
+      password: Klm_code123
+      url: jdbc:mysql://182.92.174.140:3306/prism?characterEncoding=utf-8&serverTimezone=GMT&useSSL=false
+      username: klm
+    prism-target:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      max-idle: 10
+      max-wait: 10000
+      min-idle: 5
+      password: Klm_code123
+      url: jdbc:mysql://182.92.174.140:3306/prism_target?characterEncoding=utf-8&serverTimezone=GMT&useSSL=false
+      username: klm
