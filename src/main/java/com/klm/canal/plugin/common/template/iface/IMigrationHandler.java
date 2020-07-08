@@ -2,7 +2,7 @@ package com.klm.canal.plugin.common.template.iface;
 
 /**
  * 统一处理操作
- * @author sunqiuxiang
+ * @author quinn
  * @date 2019-05-31 14:05
  */
 public interface IMigrationHandler<P, C, R> {
@@ -11,7 +11,7 @@ public interface IMigrationHandler<P, C, R> {
      * @param param 参数
      * @return 上下文
      * @date 2019-05-31
-     * @author sunqiuxiang
+     * @author quinn
      */
     C buildContext(final P param);
 
@@ -21,7 +21,7 @@ public interface IMigrationHandler<P, C, R> {
      * @param context 上下文
      * @return 处理结果
      * @date 2019-05-31
-     * @author sunqiuxiang
+     * @author quinn
      */
     R process(final P param, final C context);
 }

@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * @author sunqiuxiang
+ * @author quinn
  * @date 2019-05-31 14:30
  */
 @Slf4j

@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * base封装事件
  *
- * @author sunqiuxiang
+ * @author quinn
  * @date 2019-10-24
  */
 @Data

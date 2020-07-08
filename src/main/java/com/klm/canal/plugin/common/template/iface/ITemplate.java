@@ -2,7 +2,7 @@ package com.klm.canal.plugin.common.template.iface;
 
 
 /**
- * @author sunqiuxiang
+ * @author quinn
  * @date 2019-05-31 14:16
  */
 public interface ITemplate<P, C, R> extends IMigrationHandler<P, C, R> {
@@ -13,7 +13,7 @@ public interface ITemplate<P, C, R> extends IMigrationHandler<P, C, R> {
      * @param param 请求参数
      * @return 过滤结果
      * @date 2019-06-04
-     * @author sunqiuxiang
+     * @author quinn
      */
     boolean preFilter(final P param);
 
@@ -24,7 +24,7 @@ public interface ITemplate<P, C, R> extends IMigrationHandler<P, C, R> {
      * @param param   请求参数
      * @param context 上下文
      * @date 2019-06-04
-     * @author sunqiuxiang
+     * @author quinn
      */
     void postFilter(R result, final P param, final C context);
 
@@ -33,7 +33,7 @@ public interface ITemplate<P, C, R> extends IMigrationHandler<P, C, R> {
      * @param responseCode 返回信息
      * @return 返回结果
      * @date 2019-06-04
-     * @author sunqiuxiang
+     * @author quinn
      */
     R buildResult(Integer responseCode, String msg);
 }

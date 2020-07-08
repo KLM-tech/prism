@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * 数据源切换注解
  *
- * @author sunqiuxiang
+ * @author quinn
  */
 
 @Target(ElementType.METHOD)

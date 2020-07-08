@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 /**
  * 抽象模版
  *
- * @author sunqiuxiang
+ * @author quinn
  * @date 2019-10-24
  */
 @Slf4j
